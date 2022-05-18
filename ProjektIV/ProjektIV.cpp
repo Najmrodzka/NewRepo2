@@ -67,8 +67,70 @@ string FormattedTimestamp()
     return str;
 };
 
-int main()
-{
+void CompareFunction(const char* FirstFile, const char* SecondFile) {
+    string Starting = FormattedTimestamp();
+    ifstream file1 (FirstFile, ios::binary);
+    ifstream file2 (SecondFile, ios::binary);
+    long long int iloscBitow = 0, ber = 0;
+    char a{};
+    char b{};
 
+    auto start_time = chrono::high_resolution_clock::now();
+
+    while (!file1.eof())
+    {
+        file1 >> a;
+        file2 >> b;
+
+        if (file1.eof()) { break; } 
+
+        iloscBitow = iloscBitow + 8;
+        ber = calculateHamingDistance(a, b) + ber;
+    }
+   auto end_time = chrono::high_resolution_clock::now();
+    auto time = end_time - start_time;
+
+    cout << "Program started at: " << Starting << endl;
+    cout << "Comparing :" << FirstFile << " and " << SecondFile << endl;
+    cout << "Compared bits : " << iloscBitow << endl;
+    cout << "Different bits : " << ber << endl;
+    cout << "Calc time : " << time/chrono::microseconds(1) << " microsecond" << endl;
+    cout << "End calculation" << endl;
+    
+    //Open log file
+    ofstream log;
+    log.open("log.txt", ios_base::app);
+
+    if (log.good())
+    {
+        log << "Program started at: " << Starting << endl;
+        log << "Comparing :" << FirstFile << " and " << SecondFile << endl;
+        log << "Compared bits : " << iloscBitow << endl;
+        log << "Different bits : " << ber << endl;
+        log << "Calc time : " << time/chrono::microseconds(1) << " microsecond" << endl;
+        log << "End calculation" << endl;
+        log.close();
+    }
+    else
+        cout << "There is a problem with file log";"/n";
+};
+
+int main(int argc, char* argv[])
+{
+    /* createFile("100bytes_1.bin", 100, 0x55);
+    createFile("100bytes_2.bin", 100, 0x55);
+    createFileRandom("100bytes_3_changed_by_10_bytes.bin", 100, 0x55, 0x45);
+    createFile("400MB_1.bin", 419430400, 0x55);
+    createFile("400MB_2.bin", 419430400, 0x50);
+    cout << "wykonano create file";
+    */
+    std::cout << "BER Checker!" << std::endl;
+    std::cout << "argc = : " << argc << std::endl;
+
+    int iter = 0;
+    for (iter = 0; iter < argc; iter++) {
+        std::cout << "argv[" << iter << "] =" << argv[iter]<<std::endl;
+    }
+    CompareFunction(argv[1], argv[2]);
 }
 
