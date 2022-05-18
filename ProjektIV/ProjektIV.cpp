@@ -49,6 +49,24 @@ uint8_t calculateHamingDistance(uint8_t n1, uint8_t n2)
     return setBits;
 };
 
+double Timestamp()
+{
+    chrono::system_clock::time_point now = chrono::system_clock::now();
+    return chrono::system_clock::to_time_t(now);
+};
+
+string FormattedTimestamp()
+{
+    time_t timestamp = Timestamp();
+    struct tm timeinfo;
+    char buffer[80];
+    time(&timestamp);
+    localtime_s(&timeinfo, &timestamp);
+    strftime(buffer, 80, "%H:%M:%S", &timeinfo);
+    string str(buffer);
+    return str;
+};
+
 int main()
 {
 
