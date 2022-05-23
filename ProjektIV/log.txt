@@ -1,0 +1,18 @@
+Program started at: 14:56:56
+Comparing :100bytes_1.bin and 100bytes_2.bin
+Compared bits : 800
+Different bits : 0
+Calc time : 187 microsecond
+End calculation
+Program started at: 14:57:01
+Comparing :100bytes_1.bin and 100bytes_3_changed_by_10_bytes.bin
+Compared bits : 800
+Different bits : 10
+Calc time : 106 microsecond
+End calculation
+Program started at: 14:57:10
+Comparing :400MB_1.bin and 400MB_2.bin
+Compared bits : 3355443200
+Different bits : 838860800
+Calc time : 287827755 microsecond
+End calculation
